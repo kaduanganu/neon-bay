@@ -36,6 +36,7 @@ import {
 } from './config.js';
 import { onPier, onRoad } from './world.js';
 import { tileHash, clamp, lerp } from './random.js';
+import { loadGLB } from './glb.js';
 
 export const SCREEN_TITLE = 'title';
 export const SCREEN_PLAY = 'play';
@@ -473,17 +474,19 @@ export function createRenderer(canvas, overlay) {
   }
 
   // ---- model loading: every .glb, plus the title logo ----
+  // The .glb files load through the hand-written minimal loader in
+  // glb.js (loadGLB), which reads the GLB container straight from the
+  // format — no downloaded loader code. It returns the scene root as a
+  // THREE.Group, so the game treats it exactly like the old loader's
+  // gltf.scene.
   const models = {};
-  const loader = new THREE.GLTFLoader();
   function loadModel(name) {
-    return new Promise((resolve, reject) => {
-      loader.load(`assets3d/${name}.glb`, (gltf) => {
-        gltf.scene.traverse((o) => {
-          if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; }
-        });
-        models[name] = gltf.scene;
-        resolve(gltf.scene);
-      }, undefined, reject);
+    return loadGLB(`assets3d/${name}.glb`).then((scene) => {
+      scene.traverse((o) => {
+        if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; }
+      });
+      models[name] = scene;
+      return scene;
     });
   }
   const logoPromise = new Promise((resolve) => {

@@ -6,9 +6,10 @@
 // stages that scene instead of running the loop, paints it twice and sets
 // window.__shotReady for a screenshot.
 //
-// The 3D models load asynchronously (GLTFLoader), so boot waits for the
-// renderer's ready promise before the loop or the staging starts. If
-// WebGL cannot start, the status line says so and the game does not run.
+// The 3D models load asynchronously (the hand-written GLB loader in
+// glb.js), so boot waits for the renderer's ready promise before the
+// loop or the staging starts. If WebGL cannot start, the status line
+// says so and the game does not run.
 
 import { STEP, WORLD_H, WORLD_W } from './config.js';
 import { createRandom } from './random.js';

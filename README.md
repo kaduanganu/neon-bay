@@ -21,6 +21,8 @@ The city is a beachfront strip: a row of colourful shops along the north edge, a
 
 Gameplay still runs on the same 2D ground-plane coordinates as the earlier 2.5D version — the same map, the same collision, the same missions — only the rendering is 3D.
 
+The `.glb` files load through a hand-written minimal GLB loader (`game/js/glb.js`), written from the GLB/glTF 2.0 format itself — no downloaded loader code.
+
 ## The title screen
 
 The first thing you see is a game cover: the real **GREAT BLOX HEIST** logo (`game/assets/logo.png`) over the 3D city panning behind it, a gold subtitle ("A BLOCKY OPEN-WORLD CRIME CAPER"), the story and the five jobs in clean panels, and a pulsing start button.
@@ -68,7 +70,7 @@ game/
     logo.png        the GREAT BLOX HEIST title logo
   assets3d/
     *.glb           the 16 real 3D models: characters, cars, shops, props
-    vendor/         three.js r147 (three.min.js, GLTFLoader.js) — vendored, exempt
+    vendor/         three.js r147 (three.min.js) — vendored, exempt
   js/
     config.js       tuning: world, physics, wanted rules, bright toy palette, 3D scale
     random.js       seeded RNG, math helpers, deterministic hash
@@ -81,6 +83,7 @@ game/
     hud.js          HUD, minimap, title/pause/busted screens (2D overlay)
     audio.js        synthesized WebAudio SFX and music
     render.js       three.js renderer: scene, ground, models, camera, effects
+    glb.js          hand-written minimal GLB loader (reads the .glb container)
     input.js        keyboard and mouse
     save.js         localStorage save/load
     shots.js        staged screenshot scenes (?shot=chase|street|mission|start)
