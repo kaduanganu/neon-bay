@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Rewritten 18 Nov 2026 in the recorded Great Blox Heist 3D session. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Great Blox Heist — a blocky open-world crime game in 3D</title>
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; background: #7ec8f7; overflow: hidden; }
+  #game, #hud {
+    display: block; position: fixed; left: 0; top: 0; width: 100vw; height: 100vh;
+  }
+  #game { cursor: crosshair; }
+  #hud { pointer-events: none; }
+  #status {
+    position: fixed; left: 50%; bottom: 10px; transform: translateX(-50%);
+    color: #14161c; font: bold 12px "Trebuchet MS", Verdana, sans-serif; letter-spacing: .02em;
+    background: rgba(255, 255, 255, .85); padding: 5px 12px; border-radius: 8px;
+    border: 2px solid #ff5fa2;
+    pointer-events: none; white-space: nowrap; max-width: 92vw; overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>
+</head>
+<body>
+<canvas id="game"></canvas>
+<canvas id="hud"></canvas>
+<div id="status" role="status">Great Blox Heist is loading…</div>
+<!-- three.js r147, vendored locally: no network requests, ever. -->
+<script src="./assets3d/vendor/three.min.js"></script>
+<script src="./assets3d/vendor/GLTFLoader.js"></script>
+<script type="module" src="./js/main.js"></script>
+</body>
+</html>
